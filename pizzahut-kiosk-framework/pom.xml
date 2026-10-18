@@ -58,6 +58,43 @@
             <version>5.4.1</version>
         </dependency>
 
+        <!-- Extent Reports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Fixed compiler version. Annotation processing is off because this project does not use it,
+                 and an old processor (e.g. Lombok) on the classpath crashes newer JDKs with "TypeTag :: UNKNOWN" -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>17</release>
+                    <proc>none</proc>
+                </configuration>
+            </plugin>
+
+            <!-- "mvn test" runs the suite from testng.xml -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
